@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>kdl_eigen_example</name>
+  <version>0.0.5</version>
+  <description>Examples for KDL and Eigen</description>
+
+  <maintainer email="mehmet.killioglu@tuni.fi">Mehmet Killioglu</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>controller_interface</build_depend>
+  <build_depend>urdf</build_depend>
+  <build_depend>control_msgs</build_depend>
+  <build_depend>kdl_parser</build_depend>
+  <build_depend>angles</build_depend>
+  
+  <run_depend>backward_ros</run_depend>
+  <run_depend>controller_interface</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>control_msgs</run_depend>
+  <run_depend>kdl_parser</run_depend>
+  <run_depend>angles</run_depend>
+
+   <export>
+    <controller_interface plugin="${prefix}/controller_plugins.xml" />
+  </export>
+
+</package>
