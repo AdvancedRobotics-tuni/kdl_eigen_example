@@ -355,16 +355,22 @@ int main()
     q_(4) = 0; 
     fk_pos_solver_->JntToCart(q_, x_);
 
-    KDL::Rotation desired_marker_rot(1,0,0,0,1,0,0,0,1);
-    KDL::Vector desired_marker_pos(0.2,0,0);
-    KDL::Frame frame_desired_marker(desired_marker_rot,desired_marker_pos);
-	KDL::Frame frame_base_marker = x_ * frame_desired_marker.Inverse();
+    KDL::Rotation frame_base_end_rot(1,0,0,0,1,0,0,0,1);
+    KDL::Vector frame_base_end_pos(0,0,0.4);
+    KDL::Frame frame_base_end(frame_base_end_rot,frame_base_end_pos);
 
-    std::cout << "Frame moved 0.2 in y: " << std::endl;
-    std::cout << "X pos: " << frame_base_marker.p.x() << " |";
-    std::cout << "Y pos: " << frame_base_marker.p.y() << " |";
-    std::cout << "Z pos: " << frame_base_marker.p.z() << std::endl;
-    frame_base_marker.M.GetRPY(roll,pitch,yaw);
+    KDL::Rotation frame_cam_end_rot(1,0,0,0,1,0,0,0,1);
+    KDL::Vector frame_cam_end_pos(0,0,0.3);
+    KDL::Frame frame_cam_end(frame_cam_end_rot,frame_cam_end_pos);
+    // x_ : frame_base_end
+    // frame_cam_end.Inverse() = frame_end_cam
+	KDL::Frame frame_base_cam = frame_base_end * frame_cam_end.Inverse();
+
+    std::cout << "Frame camera w.r.t. base: " << std::endl;
+    std::cout << "X pos: " << frame_base_cam.p.x() << " |";
+    std::cout << "Y pos: " << frame_base_cam.p.y() << " |";
+    std::cout << "Z pos: " << frame_base_cam.p.z() << std::endl;
+    frame_base_cam.M.GetRPY(roll,pitch,yaw);
     std::cout << "Angles (degrees): Roll: " << roll*R2D << " |";
     std::cout << "Pitch: " << pitch*R2D << " |";
     std::cout << "Yaw: " << yaw*R2D << std::endl;
