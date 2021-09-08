@@ -48,7 +48,7 @@ catkin_package(
 
 add_executable(forward_kinematics src/forward_kinematics.cpp)
 target_link_libraries(forward_kinematics ${catkin_LIBRARIES})
-
+add_dependencies(forward_kinematics ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 #add_dependencies(forward_kinematics ${PROJECT_NAME}_gencfg)
 
 #install(DIRECTORY include/${PROJECT_NAME}/
